@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>Make Sale</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -10,23 +12,35 @@
 
     <button onclick="window.location.href='index.html'" class="back-btn">Back</button>
 
-    <h2>Sales History</h2>
+    <h2>Make Sale</h2>
 
-    <input type="date" id="searchDate">
-    <button onclick="searchByDate()">Search</button>
-    <button onclick="loadSales()">Refresh</button>
+    <!-- FORM -->
+    <input id="saleProductId" placeholder="Product ID">
+    <input id="saleQty" placeholder="Quantity">
+
+    <button onclick="makeSale()">Sell</button>
+
+    <!-- STOCK TABLE -->
+    <h3>Available Stock</h3>
 
     <table>
-        <thead id="tableHead"></thead>
-        <tbody id="salesTable"></tbody>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Supplier</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody id="stockTable"></tbody>
     </table>
-
     <div class="chart-container">
-        <canvas id="salesChart"></canvas>
+        <canvas id="stockChart"></canvas>
     </div>
 
 </div>
+<script src="/js/api.js"></script>
+<script src="/js/sales.js"></script>
 
-<script src="/js/history.js"></script>
 </body>
 </html>

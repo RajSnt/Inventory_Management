@@ -2,7 +2,9 @@ let chart;
 
 // 🔥 LOAD DEFAULT (DATE-WISE)
 function loadSales() {
-    fetch("/sales")
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    fetch(`/sales/user/${user.id}`)
         .then(res => res.json())
         .then(data => {
 
