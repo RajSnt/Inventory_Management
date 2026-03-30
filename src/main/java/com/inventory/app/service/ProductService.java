@@ -78,5 +78,7 @@ public class ProductService {
                 .toList();
     }
 
-
+    public List<Product> getProductsByUser(int userId) {
+        return repo.findByUserId(userId);
+    }
 }

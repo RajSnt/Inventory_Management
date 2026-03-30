@@ -14,6 +14,8 @@ public class Product {
     private int quantity;
     private int supplierId;
 
+    private int userId;
+
     private boolean isActive = true;
 
     // Getters & Setters
@@ -38,5 +40,13 @@ public class Product {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

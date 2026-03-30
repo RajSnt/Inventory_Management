@@ -1,10 +1,14 @@
 function makePurchase() {
+
+    const user = JSON.parse(localStorage.getItem("user")); // 🔥 ADD
+
     fetch(API + "/purchase", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
             productId: +purchaseProductId.value,
-            quantity: +purchaseQty.value
+            quantity: +purchaseQty.value,
+            userId: user.id   // 🔥 ADD THIS
         })
     })
     .then(async res => {
@@ -22,3 +26,5 @@ function makePurchase() {
         alert(err.message);
     });
 }
+
+loadStock();

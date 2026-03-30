@@ -40,4 +40,9 @@ public class ProductController {
         service.deleteProduct(id);
         return "Product deleted successfully";
     }
+
+    @GetMapping("/user/{userId}")
+    public List<Product> getByUser(@PathVariable int userId) {
+        return service.getProductsByUser(userId);
+    }
 }

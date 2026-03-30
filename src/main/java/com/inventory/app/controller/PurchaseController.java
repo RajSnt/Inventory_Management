@@ -19,8 +19,9 @@ public class PurchaseController {
     public Purchase makePurchase(@RequestBody Purchase purchase) {
         return service.makePurchase(purchase);
     }
-    @GetMapping
-    public List<Purchase> getAllPurchases() {
-        return service.getAllPurchases();
+
+    @GetMapping("/user/{userId}")
+    public List<Purchase> getByUser(@PathVariable int userId) {
+        return service.getPurchasesByUser(userId);
     }
 }

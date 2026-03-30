@@ -1,16 +1,17 @@
 package com.inventory.app.service;
 
+import com.inventory.app.model.Product;
 import com.inventory.app.model.Supplier;
 import com.inventory.app.repository.ProductRepository;
 import com.inventory.app.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 
 @Service
 public class SupplierService {
+
     @Autowired
     private SupplierRepository supplierRepository;
 
@@ -20,20 +21,19 @@ public class SupplierService {
     @Autowired
     private SupplierRepository repo;
 
+    // EXISTING METHODS (UNCHANGED)
     public Supplier addSupplier(Supplier supplier) {
         return repo.save(supplier);
     }
 
-    public List<Supplier> getAllSuppliers() {
-        return repo.findAll();
+    public List<Supplier> getSuppliersByUser(int userId) {
+        return repo.findByUserId(userId);
     }
 
     public void deleteSupplier(int id) {
-
         if (!productRepository.findBySupplierId(id).isEmpty()) {
             throw new RuntimeException("Cannot delete supplier: Products are linked to it");
         }
-
         supplierRepository.deleteById(id);
     }
 
@@ -46,5 +46,9 @@ public class SupplierService {
         supplier.setAddress(updatedSupplier.getAddress());
 
         return repo.save(supplier);
+    }
+
+    public List<Product> getProductsByUser(int userId) {
+        return productRepository.findByUserId(userId);
     }
 }

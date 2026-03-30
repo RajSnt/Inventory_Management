@@ -1,10 +1,14 @@
 function makeSale() {
+
+    const user = JSON.parse(localStorage.getItem("user")); // 🔥 ADD
+
     fetch(API + "/sales", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
             productId: +saleProductId.value,
-            quantity: +saleQty.value
+            quantity: +saleQty.value,
+            userId: user.id   // 🔥 ADD THIS
         })
     })
     .then(async res => {

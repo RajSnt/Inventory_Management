@@ -14,6 +14,8 @@ public class Sales {
     private int quantity;
     private LocalDateTime saleDate = LocalDateTime.now();
 
+    private int userId;
+
     // Getters & Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -26,4 +28,12 @@ public class Sales {
 
     public LocalDateTime getSaleDate() { return saleDate; }
     public void setSaleDate(LocalDateTime saleDate) { this.saleDate = saleDate; }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

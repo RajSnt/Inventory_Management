@@ -3,7 +3,9 @@ let chart;
 
 // 🔥 LOAD ALL
 function loadProducts() {
-    fetch("/products")
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    fetch(`/products/user/${user.id}`)
         .then(res => res.json())
         .then(data => {
             renderTable(data);
@@ -36,11 +38,14 @@ function renderTable(data) {
 // 🔥 SAVE (ADD / UPDATE)
 function saveProduct() {
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
     const product = {
         name: document.getElementById("name").value,
         price: document.getElementById("price").value,
         quantity: document.getElementById("quantity").value,
-        supplierId: document.getElementById("supplierId").value
+        supplierId: document.getElementById("supplierId").value,
+        userId: user.id   // 🔥 ADD THIS
     };
 
     let url = "/products";
@@ -113,5 +118,42 @@ function renderChart(data) {
     });
 }
 
+function loadSuppliers() {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const table = document.getElementById("supplierTable");
+
+    fetch(`/suppliers/user/${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+
+            const table = document.getElementById("supplierTable");
+            table.innerHTML = "";
+
+            if (data.length === 0) {
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="3">No suppliers found</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            data.forEach(s => {
+                table.innerHTML += `
+                    <tr>
+                        <td>${s.id}</td>
+                        <td>${s.name}</td>
+                        <td>${s.contact}</td>
+                    </tr>
+                `;
+            });
+        });
+}
+
 // INIT
-window.onload = loadProducts;
+document.addEventListener("DOMContentLoaded", function () {
+    loadProducts();
+    loadSuppliers();
+});

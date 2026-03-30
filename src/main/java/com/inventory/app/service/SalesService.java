@@ -36,4 +36,10 @@ public class SalesService {
     public List<Sales> getAllSales() {
         return salesRepo.findAll();
     }
+
+    public List<Sales> getSalesByUser(int userId) {
+        return salesRepo.findByUserId(userId);
+    }
+
+
 }

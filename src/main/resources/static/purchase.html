@@ -47,7 +47,9 @@
 
     // 🔥 Load stock + chart
     function loadStock() {
-        fetch("/products")
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        fetch(`/products/user/${user.id}`)
             .then(res => res.json())
             .then(data => {
 

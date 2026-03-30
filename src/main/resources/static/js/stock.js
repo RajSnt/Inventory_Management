@@ -1,5 +1,7 @@
 function loadStock() {
-    fetch("/products")
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    fetch(`/products/user/${user.id}`)
         .then(res => res.json())
         .then(data => {
             renderTable(data);
@@ -28,12 +30,13 @@ function search() {
     const name = document.getElementById("searchName").value.toLowerCase();
     const supplier = document.getElementById("searchSupplier").value;
 
-    fetch("/products")
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    fetch(`/products/user/${user.id}`)   // 🔥 FIXED
         .then(res => res.json())
         .then(data => {
 
             const filtered = data.filter(p => {
-
                 return (
                     (id === "" || p.id == id) &&
                     (name === "" || p.name.toLowerCase().includes(name)) &&

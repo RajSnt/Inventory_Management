@@ -2,7 +2,10 @@ let editingSupplierId = null;
 
 // LOAD SUPPLIERS
 function loadSuppliers() {
-    fetch(API + "/suppliers")
+
+    const user = JSON.parse(localStorage.getItem("user")); // 🔥 ADD
+
+    fetch(API + `/suppliers/user/${user.id}`)   // 🔥 FIXED
         .then(res => res.json())
         .then(data => {
             let table = document.getElementById("supplierTable");
@@ -28,10 +31,13 @@ function loadSuppliers() {
 // ADD / UPDATE
 function addSupplier() {
 
+    const user = JSON.parse(localStorage.getItem("user")); // 🔥 ADD
+
     const supplier = {
         name: supplierName.value,
         contact: supplierContact.value,
-        address: supplierAddress.value
+        address: supplierAddress.value,
+        userId: user.id   // 🔥 VERY IMPORTANT
     };
 
     let url = API + "/suppliers";
@@ -70,7 +76,7 @@ function addSupplier() {
 
 // DELETE
 function deleteSupplier(id) {
-    fetch(`/suppliers/${id}`, {
+    fetch(API + `/suppliers/${id}`, {
         method: "DELETE"
     })
     .then(res => {
@@ -83,7 +89,7 @@ function deleteSupplier(id) {
     .catch(err => alert(err.message));
 }
 
-// EDIT (fill form)
+// EDIT
 function editSupplier(id, name, contact, address) {
     supplierName.value = name;
     supplierContact.value = contact;
@@ -91,8 +97,11 @@ function editSupplier(id, name, contact, address) {
 
     editingSupplierId = id;
 }
+
+// BACK
 function goBack() {
     window.location.href = "/index.html";
 }
+
 // AUTO LOAD
-loadSuppliers();
+window.onload = loadSuppliers;

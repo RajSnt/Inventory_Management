@@ -20,8 +20,8 @@ public class SalesController {
         return service.makeSale(sale);
     }
 
-    @GetMapping
-    public List<Sales> getAllSales() {
-        return service.getAllSales();
+    @GetMapping("/user/{userId}")
+    public List<Sales> getByUser(@PathVariable int userId) {
+        return service.getSalesByUser(userId);
     }
 }

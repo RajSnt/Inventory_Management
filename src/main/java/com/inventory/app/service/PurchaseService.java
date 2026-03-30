@@ -33,4 +33,8 @@ public class PurchaseService {
     public List<Purchase> getAllPurchases() {
         return purchaseRepo.findAll();
     }
+
+    public List<Purchase> getPurchasesByUser(int userId) {
+        return purchaseRepo.findByUserId(userId);
+    }
 }

@@ -9,6 +9,7 @@ public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int userId;
 
     private int productId;
     private int quantity;
@@ -26,4 +27,12 @@ public class Purchase {
 
     public LocalDateTime getPurchaseDate() { return purchaseDate; }
     public void setPurchaseDate(LocalDateTime purchaseDate) { this.purchaseDate = purchaseDate; }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }
