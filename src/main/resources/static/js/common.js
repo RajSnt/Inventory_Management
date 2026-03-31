@@ -1,18 +1,19 @@
-// 🔐 LOGIN CHECK (ADD THIS AT TOP)
-const supplier = localStorage.getItem("supplier");
+// 🔐 AUTH CHECK (SAFE - NO LOOP)
+function checkAuth() {
+    const user = localStorage.getItem("user");
 
-if (!supplier) {
-    window.location.href = "login.html";
+    if (!user) {
+        window.location.href = "/login.html";
+    }
 }
 
+// 🔓 LOGOUT
+function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "/login.html";
+}
 
-// existing function
+// 🔙 BACK BUTTON
 function goBack() {
     window.location.href = "/index.html";
-}
-
-// 🔓 LOGOUT FUNCTION (ADD HERE)
-function logout() {
-    localStorage.removeItem("supplier");
-    window.location.href = "login.html";
 }

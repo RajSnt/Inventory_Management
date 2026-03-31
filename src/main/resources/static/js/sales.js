@@ -2,7 +2,7 @@ function makeSale() {
 
     const user = JSON.parse(localStorage.getItem("user")); // 🔥 ADD
 
-    fetch(API +  `/sales/user/${user.id}`, {
+    fetch(API + "/sales", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
